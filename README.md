@@ -1,6 +1,4 @@
-# React_Template
-
-Template for React exercises
+# React Lifecycle Methods
 
 ## Getting Started
 
@@ -14,33 +12,28 @@ Template for React exercises
 
 ## Exercise
 
-- Here is a basic App classcomponent rendered in the browser through index.js. 
+- Here is a basic App class component rendered in the browser through index.js.
 
 1. Initialize state in the App class component, and define a new property called "text" with some string as the value.
 
-2. Your new component should display both values from props and state. (Hint: you have two options here - you can either concatenate these strings in the same pair of JSX curly braces, or you can place two sets of braces for each string. Your choice! Choose wisely.)
+2. Add an input element to your App.
 
-\*Add an input element to your App. Use the component's state to define its placeholder attribute. Add an "onChange" event to the input, and then handle the event to set a new property on the App's state that will be tied to the input's value attribute (pro tip: name this something appropriate considering it is an input event). Replace any "wrapping" divs with the <React.Fragment> tag. How does that change the ReactDOM? Why might that be important?
+   - Use the `text` state to define its placeholder attribute.
 
-\*NOTE: Any methods you define on the class (i.e., between the constructor and render methods) should have this structure:
+3. Create a method `handleInput` that takes a HTML change event as a param (`e`) and calls `this.setState`, setting the event target value as the `text` state
+4. Add an `onChange` event to the input that calls `this.handleInput`.
 
-handleEvent(params) { // do something useful }
+- Notice how this changes the ReactDOM. Why might that be important?
+  - Answer: Each change event updates the component state, which re-renders the elements to the ReactDOM. Keep this in mind when you begin to call functions, fetch requests, etc.
 
-\*HOWEVER: Any event handlers you define in JSX elements should use arrow notation (and the concise body syntax, where applicable):
+5. Create a method `handleClick` that toggles the boolean value `hasLoaded` in the App state
+6. Add a button beneath that input with an `onClick` event that calls the `handleClick` method
+7. Change your `render` method. Write a conditional statement that checks whether or not the hasLoaded property is true. If it is, return the elements that you have already define. If false, return a new heading with the text "Loading...".
+8. Add a button beneath it that is identical to the one you created earlier.
 
-onEvent={(params) => this.handleEvent(params)}
+- Save and reload the browser. Which React elements are displayed first? Do you know why?
 
-\*Add a button beneath that input. When clicked, the button should invoke a method defined on the class to toggle a "hasLoaded" state property, which has a default value of false.
+9. Write a new method with the name `componentDidMount`, that will set the state property "hasLoaded" to true.
 
-\*Before you return your elements to be rendered, check whether or not the hasLoaded property is true. If it is, return the elements that you have already defined; otherwise, return a new heading with the text "Loading..." and a button beneath it that is identical to the one you created in step 8. What happens? Which React elements are displayed first, and why?
-
-\*If you can answer the questions at the end of the previous task, you already have an intuitive understanding of the lifecycle of a React Component. Given this, you can start thinking about invoking methods when these lifecycle events take place. So, write a new method with the name componentDidMount, which will set the state property "hasLoaded" to true. Now what happens when the application re-renders? Which React elements are displayed first, and why?
-
-\*Note: It is indeed correct if you don't see your "Loading..." button anymore. The lifecycle method will seemingly set some initial state values for you!
-
-\*BONUS:
-
-\*You should have three state properties at this point. Set the one that contains just a string (that was being used for your
-
-in the first few tasks) to the props value that you passed in to in step 3. Then, for the time being, remove the props parameters from the constructor and super methods. What happens?
-\*Manually revert your state property back to a regular string. Now what happens? What's going on here?
+- Now what happens when the application re-renders? Which React elements are displayed first, and why?
+  - Answer: You will not see your "Loading..." heading and button anymore. The lifecycle method will seemingly set some initial state values for you!
